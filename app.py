@@ -31,8 +31,7 @@ research = [
     "美丽", "勤奋", "耐心", "尊重"
 ]
 
-# نقطة النهاية (Endpoint) لجلب كلمة عشوائية
-@app.route('/random-word', methods=['GET'])
+@app.route('/')
 def get_random_word():
     word = random.choice(research)
     return jsonify({"word": word})
