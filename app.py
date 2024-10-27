@@ -18,7 +18,7 @@ def home():
 @app.route("/full_log")
 def full_log():
     logs = db.lrange("logs", 0, -1)  # استرجاع السجل الكامل
-    return render_template("full_log.html", logs=logs)
+    return render_template("index.html", logs=logs)
 
 
 if __name__ == "__main__":
