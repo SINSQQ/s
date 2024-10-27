@@ -8,6 +8,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
@@ -30,6 +31,10 @@
             white-space: pre-wrap; /* للسماح بعرض المسافات السطرية */
         }
         .refresh-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             padding: 10px 20px;
             font-size: 16px;
             color: white;
@@ -39,7 +44,7 @@
             cursor: pointer;
         }
         .refresh-button:hover {
-            background-color: #000000;
+            background-color: #333333;
         }
     </style>
     <script>
@@ -51,7 +56,7 @@
 <body>
     <div class="message-box">
         <p id="message">{{ message }}</p> 
-        <button class="refresh-button" onclick="refreshPage()">تحديث</button>
     </div>
+    <button class="refresh-button" onclick="refreshPage()">تحديث</button>
 </body>
 </html>
