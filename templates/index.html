@@ -17,24 +17,27 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-attachment: fixed; /* تثبيت الخلفية */
             font-family: Arial, sans-serif;
             color: white;
             font-size: 20px;
         }
         .message-box {
-            background: rgba(0, 0, 0, 0.6); /* خلفية نصف شفافة */
-            padding: 20px;
+            background: none; 
+            padding: 20px 40px;
             border-radius: 10px;
-            width: 60%;
-            max-height: 50vh; /* تحديد ارتفاع معين للصندوق */
-            overflow-y: auto; /* إضافة شريط تمرير عند الحاجة */
             text-align: center;
             color: rgb(92, 6, 6);
             font-size: 22px;
-            margin-top: 20px; /* إبعاد الصندوق عن الأعلى */
+            white-space: pre-wrap;
+            max-height: 80vh;
+            overflow-y: auto;
         }
         .refresh-button {
-            margin-top: 20px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             padding: 10px 20px;
             font-size: 16px;
             color: white;
@@ -55,7 +58,7 @@
 </head>
 <body>
     <div class="message-box">
-        <ul style="padding: 0; list-style-type: none;">
+        <ul>
             {% for log in logs %}
                 <li>{{ log }}</li>
             {% endfor %}
