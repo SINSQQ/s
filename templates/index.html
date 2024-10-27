@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sins</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('/static/image.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            color: white;
+            font-size: 20px;
+        }
+        .message-box {
+            background: none; 
+            padding: 20px 40px;
+            border-radius: 10px;
+            text-align: center;
+            color: rgb(92, 6, 6);
+            font-size: 22px;
+            white-space: pre-wrap; /* للسماح بعرض المسافات السطرية */
+        }
+        .refresh-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #000000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .refresh-button:hover {
+            background-color: #000000;
+        }
+    </style>
+    <script>
+        function refreshPage() {
+            location.reload();
+        }
+    </script>
+</head>
+<body>
+    <div class="message-box">
+        <p id="message">{{ message }}</p> 
+        <button class="refresh-button" onclick="refreshPage()">تحديث</button>
+    </div>
+</body>
+</html>
