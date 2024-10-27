@@ -40,22 +40,22 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        /* زر عرض السجل الكامل */
+        /* زر عرض السجل الكامل شفاف وأصغر */
         .full-log-button {
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 8px 16px;  /* تقليل الحشوة */
+            font-size: 14px;    /* تقليل حجم الخط */
             color: white;
-            background-color: #000000;
+            background: rgba(0, 0, 0, 0.5);
             border: none;
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
         }
         .full-log-button:hover {
-            background-color: #333333;
+            background: rgba(51, 51, 51, 0.7);
         }
         .refresh-button {
             position: fixed;
@@ -81,7 +81,7 @@
     </script>
 </head>
 <body>
-    <!-- زر لعرض السجل الكامل -->
+    <!-- زر شفاف وأصغر لعرض السجل الكامل -->
     <a href="/full_log" class="full-log-button">عرض السجل الكامل</a>
 
     <div class="message-box">
