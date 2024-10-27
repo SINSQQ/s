@@ -18,23 +18,25 @@
             background-position: center;
             background-repeat: no-repeat;
             font-family: Arial, sans-serif;
-            color: white;
+            color: #f0f0f0; /* لون النص يكون أفتح */
             font-size: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* إضافة ظل للنص */
         }
         .message-box {
-            background: none; 
-            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.6); /* خلفية نصف شفافة */
+            padding: 20px;
             border-radius: 10px;
+            width: 60%;
+            max-height: 50vh; /* تحديد ارتفاع معين للصندوق */
+            overflow-y: auto; /* إضافة شريط تمرير عند الحاجة */
             text-align: center;
-            color: rgb(92, 6, 6);
+            color: #f0f0f0; /* لون النص في الصندوق */
             font-size: 22px;
-            white-space: pre-wrap;
+            margin-top: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* إضافة ظل للنص */
         }
         .refresh-button {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            margin-top: 20px;
             padding: 10px 20px;
             font-size: 16px;
             color: white;
@@ -55,7 +57,7 @@
 </head>
 <body>
     <div class="message-box">
-        <ul>
+        <ul style="padding: 0; list-style-type: none;">
             {% for log in logs %}
                 <li>{{ log }}</li>
             {% endfor %}
