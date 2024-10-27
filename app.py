@@ -9,12 +9,23 @@ db = redis.from_url(redis_url, ssl_cert_reqs=ssl.CERT_NONE, decode_responses=Tru
 
 @app.route("/")
 def home():
-    message = db.get("log")
-    if message is None:
-        message = "لا توجد رسالة متاحة"
-    else:
-        message = message.replace('\n', '<br>')
-    return render_template("index.html", message=message)
+    logs = db.lrange("logs", -5, -1)
+    if not logs:
+        logs = ["لا توجد سجلات متاحة"]
+    return render_template("index.html", logs=logs)
+
+@app.route("/add_test_logs")
+def add_test_logs():
+    test_logs = [
+        "رسالة تجريبية 1",
+        "رسالة تجريبية 2",
+        "رسالة تجريبية 3",
+        "رسالة تجريبية 4",
+        "رسالة تجريبية 5"
+    ]
+    for log in test_logs:
+        db.rpush("logs", log)  # إضافة كل رسالة إلى نهاية قائمة "logs"
+    return "تمت إضافة السجلات التجريبية بنجاح!"
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

@@ -28,7 +28,7 @@
             text-align: center;
             color: rgb(92, 6, 6);
             font-size: 22px;
-            white-space: pre-wrap; /* للسماح بعرض المسافات السطرية */
+            white-space: pre-wrap;
         }
         .refresh-button {
             position: absolute;
@@ -55,7 +55,11 @@
 </head>
 <body>
     <div class="message-box">
-        <p id="message">{{ message }}</p> 
+        <ul>
+            {% for log in logs %}
+                <li>{{ log }}</li>
+            {% endfor %}
+        </ul>
     </div>
     <button class="refresh-button" onclick="refreshPage()">تحديث</button>
 </body>
