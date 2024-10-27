@@ -1,10 +1,11 @@
 from flask import Flask, render_template
+import os
+import ssl
 import redis
 
 app = Flask(__name__)
-
-# إعداد الاتصال بـ Redis
-redis_client = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
+redis_url = os.environ.get("REDIS_URL")
+db = redis.from_url(redis_url, ssl_cert_reqs=ssl.CERT_NONE, decode_responses=True)
 
 @app.route("/")
 def home():
