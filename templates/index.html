@@ -21,7 +21,6 @@
             font-family: Arial, sans-serif;
             color: white;
             font-size: 20px;
-            overflow: hidden; /* إخفاء شريط التمرير */
         }
         .message-box {
             background: none; 
@@ -32,7 +31,15 @@
             font-size: 22px;
             white-space: pre-wrap;
             max-height: 80vh;
-            overflow: hidden; /* إخفاء شريط التمرير داخل الصندوق */
+            overflow-y: auto;
+        }
+        /* إخفاء شريط التمرير */
+        .message-box::-webkit-scrollbar {
+            display: none;
+        }
+        .message-box {
+            -ms-overflow-style: none;  /* لإخفاء شريط التمرير في إنترنت إكسبلورر */
+            scrollbar-width: none;  /* لإخفاء شريط التمرير في فايرفوكس */
         }
         .refresh-button {
             position: fixed;
