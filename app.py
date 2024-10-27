@@ -9,18 +9,16 @@ db = redis.from_url(redis_url, ssl_cert_reqs=ssl.CERT_NONE, decode_responses=Tru
 
 @app.route("/")
 def home():
-    logs = db.lrange("logs", -5, -1)
+    logs = db.lrange("logs", -5, -1)  # استرجاع آخر 5 سجلات
+    logs.reverse()  # عكس الترتيب لعرض الأحدث في الأعلى
     if not logs:
         logs = ["لا توجد سجلات متاحة"]
     return render_template("index.html", logs=logs)
 
 @app.route("/add_test_logs")
 def add_test_logs():
-    test_logs = [
-        "رسالة تجريبية ",
-    ]
-    for log in test_logs:
-        db.rpush("logs", log)  # إضافة كل رسالة إلى نهاية قائمة "logs"
+    log = '12'
+    db.rpush("logs", log)  # إضافة كل رسالة إلى نهاية قائمة "logs"
     return "تمت إضافة السجلات التجريبية بنجاح!"
 
 if __name__ == "__main__":

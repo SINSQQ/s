@@ -17,10 +17,11 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed; /* تثبيت الخلفية */
+            background-attachment: fixed;
             font-family: Arial, sans-serif;
             color: white;
             font-size: 20px;
+            overflow: hidden; /* إخفاء شريط التمرير */
         }
         .message-box {
             background: none; 
@@ -31,7 +32,7 @@
             font-size: 22px;
             white-space: pre-wrap;
             max-height: 80vh;
-            overflow-y: auto;
+            overflow: hidden; /* إخفاء شريط التمرير داخل الصندوق */
         }
         .refresh-button {
             position: fixed;
