@@ -13,41 +13,110 @@ images = [
 # قائمة الصور المقبولة
 accepted_images = []
 
+# المؤشر الحالي للصورة
+current_image_index = 0
+
 @app.route('/')
 def index():
+    global current_image_index
+    if current_image_index >= len(images):
+        return render_template_string("""
+            <html>
+                <head>
+                    <title>تم عرض كل الصور</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f4f4f4;
+                            text-align: center;
+                            padding: 50px;
+                        }
+                        h1 {
+                            color: #333;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>تم عرض كل الصور!</h1>
+                    <p>لقد قمت بمراجعة كل الصور.</p>
+                    <br><br>
+                    <a href="/">العودة إلى البداية</a>
+                </body>
+            </html>
+        """)
+
     return render_template_string("""
         <html>
-            <head><title>عرض الصور</title></head>
+            <head>
+                <title>عرض الصورة</title>
+                <style>
+                    body {
+                        font-family: 'Arial', sans-serif;
+                        margin: 0;
+                        padding: 0;
+                        background-color: #282c34;
+                        color: white;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh;
+                        overflow: hidden;
+                    }
+                    img {
+                        max-width: 90%;
+                        max-height: 90%;
+                        object-fit: contain;
+                        border-radius: 10px;
+                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+                    }
+                    .controls {
+                        position: absolute;
+                        bottom: 50px;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                    }
+                    .btn {
+                        background-color: #4CAF50;
+                        color: white;
+                        font-size: 18px;
+                        padding: 15px 32px;
+                        margin: 0 10px;
+                        cursor: pointer;
+                        border: none;
+                        border-radius: 5px;
+                        transition: background-color 0.3s;
+                    }
+                    .btn:hover {
+                        background-color: #45a049;
+                    }
+                </style>
+            </head>
             <body>
-                <h1>اختر صورة</h1>
-                {% for image in images %}
-                    <div>
-                        <h2>صورة {{ loop.index }}</h2>
-                        <img src="{{ image }}" width="500px"><br>
-                        <a href="/accept/{{ loop.index }}">قبول</a> |
-                        <a href="/reject/{{ loop.index }}">رفض</a>
-                    </div>
-                {% endfor %}
-                <h2>الصور المقبولة</h2>
-                <ul>
-                    {% for image in accepted_images %}
-                        <li><img src="{{ image }}" width="100px"></li>
-                    {% endfor %}
-                </ul>
-                <br>
-                <a href="/download">تحميل ملف الصور المقبولة</a>
+                <div>
+                    <h2>صورة {{ current_image_index + 1 }}</h2>
+                    <img src="{{ images[current_image_index] }}" alt="صورة">
+                </div>
+                <div class="controls">
+                    <a href="/accept/{{ current_image_index }}" class="btn">قبول</a>
+                    <a href="/reject/{{ current_image_index }}" class="btn">رفض</a>
+                </div>
             </body>
         </html>
-    """, images=images, accepted_images=accepted_images)
+    """, images=images, current_image_index=current_image_index)
 
 @app.route('/accept/<int:image_index>')
 def accept_image(image_index):
-    if image_index >= 1 and image_index <= len(images):
-        accepted_images.append(images[image_index - 1])
+    global current_image_index
+    if image_index >= 0 and image_index < len(images):
+        accepted_images.append(images[image_index])
+    current_image_index += 1  # الانتقال للصورة التالية
     return index()
 
 @app.route('/reject/<int:image_index>')
 def reject_image(image_index):
+    global current_image_index
+    current_image_index += 1  # الانتقال للصورة التالية
     return index()
 
 @app.route('/download')
