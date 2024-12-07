@@ -22,7 +22,8 @@ def index():
                 <h1>اختر صورة</h1>
                 {% for image in images %}
                     <div>
-                        <img src="{{ image }}" width="300px"><br>
+                        <h2>صورة {{ loop.index }}</h2>
+                        <img src="{{ image }}" width="500px"><br>
                         <a href="/accept/{{ loop.index }}">قبول</a> |
                         <a href="/reject/{{ loop.index }}">رفض</a>
                     </div>
@@ -61,6 +62,5 @@ def download_file():
     return send_file(file_path, as_attachment=True, download_name="accepted_images.txt")
 
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
