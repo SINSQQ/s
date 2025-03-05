@@ -3,7 +3,7 @@ from flask import Flask, render_template_string
 
 app = Flask(__name__)
 
-html_page = """
+html_page = html_page = """
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -19,13 +19,18 @@ html_page = """
             justify-content: center;
             align-items: center;
             background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
         }
         #coordinates {
-            font-size: 24px;
+            font-size: 2vw;
             background: white;
-            padding: 15px 30px;
+            padding: 1.5vw 3vw;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            word-wrap: break-word;
         }
     </style>
 </head>
