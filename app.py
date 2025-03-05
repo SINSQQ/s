@@ -3,7 +3,7 @@ from flask import Flask, render_template_string
 
 app = Flask(__name__)
 
-html_page = html_page = """
+html_page = """
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -22,6 +22,7 @@ html_page = html_page = """
             margin: 0;
             padding: 0;
             width: 100vw;
+            position: relative;
         }
         #coordinates {
             font-size: 2vw;
@@ -31,6 +32,19 @@ html_page = html_page = """
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             max-width: 90%;
             word-wrap: break-word;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .click-point {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -42,6 +56,16 @@ html_page = html_page = """
             let x = event.clientX;
             let y = event.clientY;
             document.getElementById("coordinates").innerText = `إحداثيات النقر: X=${x}, Y=${y}`;
+            
+            // إزالة النقاط السابقة
+            document.querySelectorAll('.click-point').forEach(point => point.remove());
+            
+            // إنشاء نقطة جديدة
+            let point = document.createElement("div");
+            point.classList.add("click-point");
+            point.style.left = `${x}px`;
+            point.style.top = `${y}px`;
+            document.body.appendChild(point);
         });
     </script>
 </body>
